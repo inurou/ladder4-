@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coderx.dao.MenusetMapper" >
+  <resultMap id="BaseResultMap" type="com.coderx.entity.Menuset" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="preprice" property="preprice" jdbcType="DOUBLE" />
+    <result column="nowprice" property="nowprice" jdbcType="DOUBLE" />
+    <result column="imgsrc" property="imgsrc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, preprice, nowprice, imgsrc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from menuset
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menuset
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coderx.entity.Menuset" >
+    insert into menuset (id, name, preprice, 
+      nowprice, imgsrc)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{preprice,jdbcType=DOUBLE}, 
+      #{nowprice,jdbcType=DOUBLE}, #{imgsrc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coderx.entity.Menuset" >
+    insert into menuset
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="preprice != null" >
+        preprice,
+      </if>
+      <if test="nowprice != null" >
+        nowprice,
+      </if>
+      <if test="imgsrc != null" >
+        imgsrc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="preprice != null" >
+        #{preprice,jdbcType=DOUBLE},
+      </if>
+      <if test="nowprice != null" >
+        #{nowprice,jdbcType=DOUBLE},
+      </if>
+      <if test="imgsrc != null" >
+        #{imgsrc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coderx.entity.Menuset" >
+    update menuset
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="preprice != null" >
+        preprice = #{preprice,jdbcType=DOUBLE},
+      </if>
+      <if test="nowprice != null" >
+        nowprice = #{nowprice,jdbcType=DOUBLE},
+      </if>
+      <if test="imgsrc != null" >
+        imgsrc = #{imgsrc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coderx.entity.Menuset" >
+    update menuset
+    set name = #{name,jdbcType=VARCHAR},
+      preprice = #{preprice,jdbcType=DOUBLE},
+      nowprice = #{nowprice,jdbcType=DOUBLE},
+      imgsrc = #{imgsrc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.coderx.entity.Menuset">
+    select
+    <include refid="Base_Column_List" />
+    from menuset
+  </select>
+</mapper>

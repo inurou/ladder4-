@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coderx.dao.SetdateMapper" >
+  <resultMap id="BaseResultMap" type="com.coderx.entity.Setdate" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="orderDate" property="orderdate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, orderDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from setdate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from setdate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coderx.entity.Setdate" >
+    insert into setdate (id, orderDate)
+    values (#{id,jdbcType=INTEGER}, #{orderdate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coderx.entity.Setdate" >
+    insert into setdate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderdate != null" >
+        orderDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coderx.entity.Setdate" >
+    update setdate
+    <set >
+      <if test="orderdate != null" >
+        orderDate = #{orderdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coderx.entity.Setdate" >
+    update setdate
+    set orderDate = #{orderdate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteAll" parameterType="java.lang.Integer" >
+    delete from setdate
+  </delete>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.coderx.entity.Setdate">
+    select
+    <include refid="Base_Column_List" />
+    from setdate
+  </select>
+</mapper>

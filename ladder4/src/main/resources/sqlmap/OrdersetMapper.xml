@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coderx.dao.OrdersetMapper" >
+  <resultMap id="BaseResultMap" type="com.coderx.entity.Orderset" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="VARCHAR" />
+    <result column="orderName" property="ordername" jdbcType="VARCHAR" />
+    <result column="orderTime" property="ordertime" jdbcType="VARCHAR" />
+    <result column="orderMessage" property="ordermessage" jdbcType="VARCHAR" />
+    <result column="orderMoney" property="ordermoney" jdbcType="DOUBLE" />
+    <result column="dept" property="dept" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, orderId, orderName, orderTime, orderMessage, orderMoney, dept, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderset
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.coderx.entity.Orderset" >
+    select
+    <include refid="Base_Column_List" />
+    from orderset
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="com.coderx.entity.Orderset" >
+    select
+    <include refid="Base_Column_List" />
+    from orderset
+    where orderName = #{orderName,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orderset
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.coderx.entity.Orderset" >
+    insert into orderset (id, orderId, orderName, 
+      orderTime, orderMessage, orderMoney, 
+      dept, status)
+    values (#{id,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, #{ordername,jdbcType=VARCHAR}, 
+      #{ordertime,jdbcType=VARCHAR}, #{ordermessage,jdbcType=VARCHAR}, #{ordermoney,jdbcType=DOUBLE}, 
+      #{dept,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coderx.entity.Orderset" >
+    insert into orderset
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="ordername != null" >
+        orderName,
+      </if>
+      <if test="ordertime != null" >
+        orderTime,
+      </if>
+      <if test="ordermessage != null" >
+        orderMessage,
+      </if>
+      <if test="ordermoney != null" >
+        orderMoney,
+      </if>
+      <if test="dept != null" >
+        dept,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordername != null" >
+        #{ordername,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermessage != null" >
+        #{ordermessage,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null" >
+        #{ordermoney,jdbcType=DOUBLE},
+      </if>
+      <if test="dept != null" >
+        #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coderx.entity.Orderset" >
+    update orderset
+    <set >
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordername != null" >
+        orderName = #{ordername,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        orderTime = #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermessage != null" >
+        orderMessage = #{ordermessage,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null" >
+        orderMoney = #{ordermoney,jdbcType=DOUBLE},
+      </if>
+      <if test="dept != null" >
+        dept = #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coderx.entity.Orderset" >
+    update orderset
+    set orderId = #{orderid,jdbcType=VARCHAR},
+      orderName = #{ordername,jdbcType=VARCHAR},
+      orderTime = #{ordertime,jdbcType=VARCHAR},
+      orderMessage = #{ordermessage,jdbcType=VARCHAR},
+      orderMoney = #{ordermoney,jdbcType=DOUBLE},
+      dept = #{dept,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusById" parameterType="java.lang.Integer" >
+    update orderset
+    set
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
